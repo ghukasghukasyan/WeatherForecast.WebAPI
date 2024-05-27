@@ -31,9 +31,9 @@ namespace WeatherForecast.Application.Queries.Weathers
 
             if (todayWeather == null)
             {
-                throw new WeatherAPIException($"Todays weather have not been filled yet", ErrorCode.NotFound);
+                throw new WeatherAPIException($"Today's weather has not been filled yet", ErrorCode.NotFound);
             }
-            
+
             var hourlyWeather = await _weatherContext.HourlyWeathers
                   .AsNoTracking()
                   .Where(x => x.WeatherId == todayWeather.Id && x.Hour == request.Hour)

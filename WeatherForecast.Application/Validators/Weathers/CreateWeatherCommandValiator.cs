@@ -23,9 +23,7 @@ namespace WeatherForecast.Application.Validators.Weathers
     {
         public HourlyWeatherValidator()
         {
-            //RuleFor(hw => hw.WeatherId).NotEmpty().WithMessage("WeatherId filed is required");
-            
-            RuleFor(hw => hw.Hour).NotEmpty().WithMessage("The hour filed is required").InclusiveBetween(0, 23)
+            RuleFor(hw => hw.Hour).NotNull().WithMessage("The hour filed is required").InclusiveBetween(0, 23)
                 .WithMessage("Hour must be between 0 and 23.");
         }
 

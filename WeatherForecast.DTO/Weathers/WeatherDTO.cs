@@ -18,7 +18,7 @@ namespace WeatherForecast.DTO.Weathers
                 weatherDTO.Date,
                 weatherDTO.AverageTemperature,
                 weatherDTO.Summary,
-                weatherDTO.HourlyWeathers.Select(x => new HourlyWeather(x.Id, x.Hour, x.TemperatureC, x.Summary)).ToList());
+                weatherDTO.HourlyWeathers.Select(x => new HourlyWeather(Guid.NewGuid(), x.Hour, x.TemperatureC, x.Summary)).ToList());
         }
 
         public static List<Weather> ToEntities(List<WeatherDTO> weatherDTOs)
@@ -28,7 +28,7 @@ namespace WeatherForecast.DTO.Weathers
                  weatherDTO.Date,
                  weatherDTO.AverageTemperature,
                  weatherDTO.Summary,
-                 weatherDTO.HourlyWeathers.Select(x => new HourlyWeather(x.Id, x.Hour, x.TemperatureC, x.Summary)).ToList())).ToList();
+                 weatherDTO.HourlyWeathers.Select(x => new HourlyWeather(Guid.NewGuid(), x.Hour, x.TemperatureC, x.Summary)).ToList())).ToList();
         }
 
         public static Expression<Func<Weather, WeatherDTO>> GetSelector()
@@ -39,7 +39,7 @@ namespace WeatherForecast.DTO.Weathers
                 Date = weather.Date,
                 AverageTemperature = weather.AverageTemperature,
                 Summary = weather.Summary,
-                HourlyWeathers = weather.HourlyWeathers.Select(x => new HourlyWeatherDTO { Id = x.Id, Hour = x.Hour, Summary = x.Summary, TemperatureC = x.TemperatureC }).ToList()
+                HourlyWeathers = weather.HourlyWeathers.Select(x => new HourlyWeatherDTO { Hour = x.Hour, Summary = x.Summary, TemperatureC = x.TemperatureC }).ToList()
             };
         }
     }
