@@ -65,9 +65,15 @@ namespace WeatherForecast.Domain.Services.Weathers
         {
             await CheckRuleAsync(new EntityExists<Weather>(weather.Id, _weatherContext, cancellationToken));
 
-            var existingWeather = await _weatherContext.Weathers.FirstOrDefaultAsync(x => x.Id == weather.Id, cancellationToken);
+            UpdateWeatherId(weather);
+
+            var existingWeather = await _weatherContext.Weathers
+                .Include(x => x.HourlyWeathers)
+                .FirstOrDefaultAsync(x => x.Id == weather.Id, cancellationToken);
 
             existingWeather.Update(weather);
+
+            _weatherContext.Entry(existingWeather).State = EntityState.Unchanged;
 
             var result = _weatherContext.Weathers.Update(existingWeather);
 
@@ -77,5 +83,15 @@ namespace WeatherForecast.Domain.Services.Weathers
         {
             throw new NotImplementedException();
         }
+
+        private void UpdateWeatherId(Weather weather)
+        {
+            foreach (var hourlyWeather in weather.HourlyWeathers)
+            {
+                hourlyWeather.SetWeatherId(weather.Id);
+            }
+        }
     }
+
+
 }

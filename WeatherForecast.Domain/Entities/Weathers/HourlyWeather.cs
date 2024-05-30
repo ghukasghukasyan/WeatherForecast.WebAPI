@@ -15,12 +15,26 @@
             Summary = summary;
         }
 
+        public HourlyWeather(Guid id, int hour, double temperatureC, string summary, Guid weatherId)
+        {
+            Id = id;
+            Hour = hour;
+            TemperatureC = temperatureC;
+            Summary = summary;
+            WeatherId = weatherId;
+        }
+
         public void Update(int hour, double temperatureC, string summary, Guid weatherId)
         {
             Hour = hour;
             TemperatureC = temperatureC;
             Summary = summary;
-            WeatherId = weatherId;       
+            WeatherId = weatherId;
+        }
+
+        public void SetWeatherId(Guid weatherId)
+        {
+            WeatherId = weatherId;
         }
 
 

@@ -9,7 +9,7 @@
 
         public Weather()
         {
-                
+
         }
         public Weather(Guid id, DateTime date, double averageTemperature, string summary, List<HourlyWeather> hourlyWeathers)
         {
@@ -25,7 +25,29 @@
             Date = weather.Date;
             AverageTemperature = weather.AverageTemperature;
             Summary = weather.Summary;
-            HourlyWeathers = weather.HourlyWeathers;
+            UpdateHourlyWeather(weather.HourlyWeathers);
+        }
+
+        private void UpdateHourlyWeather(List<HourlyWeather> hourlyWeathers)
+        {
+            HourlyWeathers.Clear();
+
+            AddHourlyWeathers(hourlyWeathers);
+        }
+
+        public void AddHourlyWeathers(List<HourlyWeather> newhourlyWeathers)
+        {
+            if (newhourlyWeathers == null || !newhourlyWeathers.Any()) return;
+
+            foreach (var newhourlyWeather in newhourlyWeathers)
+            {
+                AddHourlyWeather(newhourlyWeather);
+            }
+        }
+
+        public void AddHourlyWeather(HourlyWeather hourlyWeather)
+        {
+            HourlyWeathers.Add(hourlyWeather);
         }
     }
 }

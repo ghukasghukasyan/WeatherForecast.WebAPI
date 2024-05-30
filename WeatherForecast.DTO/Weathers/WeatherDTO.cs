@@ -28,7 +28,7 @@ namespace WeatherForecast.DTO.Weathers
                  weatherDTO.Date,
                  weatherDTO.AverageTemperature,
                  weatherDTO.Summary,
-                 weatherDTO.HourlyWeathers.Select(x => new HourlyWeather(Guid.NewGuid(), x.Hour, x.TemperatureC, x.Summary)).ToList())).ToList();
+                 weatherDTO.HourlyWeathers.Select(x => new HourlyWeather(Guid.NewGuid(), x.Hour, x.TemperatureC, x.Summary, weatherDTO.Id)).ToList())).ToList();
         }
 
         public static Expression<Func<Weather, WeatherDTO>> GetSelector()
