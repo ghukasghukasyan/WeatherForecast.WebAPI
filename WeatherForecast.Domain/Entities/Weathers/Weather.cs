@@ -25,7 +25,7 @@
             Date = weather.Date;
             AverageTemperature = weather.AverageTemperature;
             Summary = weather.Summary;
-            UpdateHourlyWeather(weather.HourlyWeathers);
+            //UpdateHourlyWeather(weather.HourlyWeathers);
         }
 
         private void UpdateHourlyWeather(List<HourlyWeather> hourlyWeathers)
